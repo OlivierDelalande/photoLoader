@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Http} from '@angular/http';
+import {PhotoLoaderService} from '../services/photo-loader.service';
 
 @Component({
   selector: 'app-photo-loader',
@@ -12,16 +12,16 @@ export class PhotoLoaderComponent implements OnInit {
     photo : 'myphoto'
   };
   constructor(
-    private http: Http
-  ) { }
+    private photoLoader: PhotoLoaderService) {}
+
   ngOnInit() {
   }
+
   sendJSON () {
     console.log('JSON sent');
     console.log(this.myjson);
-    this.http.get('http://localhost:8080').subscribe(data => {
-      console.log('test push');
-      console.log(data.json());
-    });
+    this.photoLoader.getJson().subscribe((data) => {
+      console.log(data);
+    })
   }
 }
