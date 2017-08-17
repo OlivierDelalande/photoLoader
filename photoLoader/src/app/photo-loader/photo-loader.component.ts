@@ -17,11 +17,10 @@ export class PhotoLoaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendJSON () {
-    console.log('JSON sent');
-    console.log(this.myjson);
-    this.photoLoader.getJson().subscribe((data) => {
-      console.log(data);
-    })
+  sendJSON() {
+    this.photoLoader.postJson(this.myjson).subscribe((data) => {
+      console.log('url from back', data);
+    });
   }
+
 }

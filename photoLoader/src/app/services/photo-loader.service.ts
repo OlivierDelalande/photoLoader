@@ -7,7 +7,9 @@ export class PhotoLoaderService {
 
   constructor(private http: Http) { }
 
-  getJson() {
-    return this.http.get('http://localhost:8080').map((data) => data.json())
+  postJson(myjson) {
+    return this.http.post('http://localhost:8080', myjson).map((data) => data.json()
+    );
   }
+
 }
