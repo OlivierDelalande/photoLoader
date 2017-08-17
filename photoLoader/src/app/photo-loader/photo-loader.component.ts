@@ -20,6 +20,7 @@ export class PhotoLoaderComponent implements OnInit {
     console.log('JSON sent');
     console.log(this.myjson);
     this.http.get('http://localhost:8080').subscribe(data => {
+      console.log('test push');
       console.log(data.json());
     });
   }
