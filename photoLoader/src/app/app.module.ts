@@ -10,7 +10,7 @@ import {PhotoLoaderModule} from './photo-loader/photo-loader.module';
   ],
   imports: [
     BrowserModule,
-    PhotoLoaderModule
+    PhotoLoaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
