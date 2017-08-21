@@ -22,5 +22,4 @@ export class PhotoLoaderComponent implements OnInit {
       console.log('url from back', data);
     });
   }
-
 }

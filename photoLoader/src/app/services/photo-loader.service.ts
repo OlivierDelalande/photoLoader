@@ -8,7 +8,7 @@ export class PhotoLoaderService {
   constructor(private http: Http) { }
 
   postJson(myjson) {
-    return this.http.post('http://localhost:8080', myjson).map((data) => data.json()
+    return this.http.post('https://us-central1-photo-loader.cloudfunctions.net/api/', myjson).map((data) => data.json()
     );
   }
 
