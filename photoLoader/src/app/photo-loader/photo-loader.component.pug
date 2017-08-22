@@ -1,5 +1,11 @@
 button((click)="sendJSON()") Send JSON
 
-div
-  input#photo(type='file')
-  button(type='button', (click)='upload()') Upload
+//div
+//  input#photo(type='file')
+//  button(type='button', (click)='upload()') Upload
+form
+  input(type='file', name='photo', ng2fileselect='', [uploader]='uploader')
+  // button to trigger the file upload when submitted
+  button.btn.btn-success.btn-s(type='button', (click)='uploader.uploadAll()', [disabled]='!uploader.getNotUploadedItems().length')
+    | Upload with ng-2 file uploader
+

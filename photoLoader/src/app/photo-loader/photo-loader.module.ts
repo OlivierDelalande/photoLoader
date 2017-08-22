@@ -4,15 +4,20 @@ import { PhotoLoaderComponent } from './photo-loader.component';
 import {HttpModule, } from '@angular/http';
 import {PhotoLoaderService} from '../services/photo-loader.service';
 import {InputFileModule} from '../../DopplerEffectModules/module-input-file/input-file.module';
+import {
+  FileSelectDirective,
+} from 'ng2-file-upload';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
-    InputFileModule
+    InputFileModule,
+    FormsModule
   ],
-  declarations: [PhotoLoaderComponent],
-  exports: [PhotoLoaderComponent],
+  declarations: [PhotoLoaderComponent, FileSelectDirective],
+  exports: [PhotoLoaderComponent ],
   providers: [PhotoLoaderService]
 })
 export class PhotoLoaderModule { }

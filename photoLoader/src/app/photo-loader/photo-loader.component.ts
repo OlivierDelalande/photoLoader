@@ -1,9 +1,11 @@
 import {
   Component,
-  ElementRef,
   OnInit,
 } from '@angular/core';
+// import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
+import {   FileUploader } from 'ng2-file-upload';
 import {PhotoLoaderService} from '../services/photo-loader.service';
+// import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-photo-loader',
@@ -13,12 +15,19 @@ import {PhotoLoaderService} from '../services/photo-loader.service';
 
 export class PhotoLoaderComponent implements OnInit {
   myjson = {};
-
+  public uploader: FileUploader = new FileUploader({url: ''});
   constructor(
-    private photoLoader: PhotoLoaderService,
-    private el: ElementRef) {}
+    private photoLoader: PhotoLoaderService
+  ) {}
 
   ngOnInit() {
+    // override the onAfterAddingfile property of the uploader so it doesn't authenticate with //credentials.
+    // this.uploader.onAfterAddingFile = (file) => {
+    //   file.withCredentials = false;
+    // };
+    // this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+    //   console.log("ImageUpload:uploaded:", item, status, response);
+    // };
   }
 
   sendJSON() {
@@ -26,17 +35,19 @@ export class PhotoLoaderComponent implements OnInit {
       console.log('url from back', data);
     });
   }
-  upload() {
-    const inputEl = this.el.nativeElement.querySelector('#photo');
-    const fileCount: number = inputEl.files.length;
-    const formData = new FormData();
-    if ( fileCount > 0 ) {
-      formData.append('photo', inputEl.files.item(0));
-      this.myjson = {
-        picture: formData.get('photo')};
-    }
-    this.photoLoader.postPicture(this.myjson).subscribe((data) => {
-      console.log('resized picture', data);
-    });
-  }
+
+
+  // upload() {
+  //   const inputEl = this.el.nativeElement.querySelector('#photo');
+  //   const fileCount: number = inputEl.files.length;
+  //   const formData = new FormData();
+  //   if ( fileCount > 0 ) {
+  //     formData.append('photo', inputEl.files.item(0));
+  //     this.myjson = {
+  //       picture: formData.get('photo')};
+  //   }
+  //   this.photoLoader.postPicture(this.myjson).subscribe((data) => {
+  //     console.log('resized picture', data);
+  //   });
+  // }
 }
