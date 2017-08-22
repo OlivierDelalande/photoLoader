@@ -2,15 +2,14 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-// import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
-import {   FileUploader } from 'ng2-file-upload';
 import {PhotoLoaderService} from '../services/photo-loader.service';
-// import {NgClass} from '@angular/common';
+import {FileUploader} from 'ng2-file-upload';
 
 @Component({
   selector: 'app-photo-loader',
   templateUrl: './photo-loader.component.html',
-  styleUrls: ['./photo-loader.component.css']
+  styleUrls: ['./photo-loader.component.css'],
+  providers: [FileUploader],
 })
 
 export class PhotoLoaderComponent implements OnInit {
@@ -50,4 +49,5 @@ export class PhotoLoaderComponent implements OnInit {
   //     console.log('resized picture', data);
   //   });
   // }
+
 }

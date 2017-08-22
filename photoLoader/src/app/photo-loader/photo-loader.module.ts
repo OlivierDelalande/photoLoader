@@ -4,10 +4,8 @@ import { PhotoLoaderComponent } from './photo-loader.component';
 import {HttpModule, } from '@angular/http';
 import {PhotoLoaderService} from '../services/photo-loader.service';
 import {InputFileModule} from '../../DopplerEffectModules/module-input-file/input-file.module';
-import {
-  FileSelectDirective,
-} from 'ng2-file-upload';
 import {FormsModule} from '@angular/forms';
+import {FileSelectDirective} from 'ng2-file-upload';
 
 @NgModule({
   imports: [
