@@ -1,5 +1,10 @@
 button((click)="sendJSON()") Send JSON
 
-form([formGroup]="loadPictureForm", (ngSubmit)="loadPicture(loadPictureForm.value)", [class.submitted]="submitted", [class.ng-invalid]="errorServer", novalidate)
-  input-file(formControlName="file")
-  button(type="submit") Send Picture
+form([formGroup]="loadPictureForm")
+  input-file(formControlName="file", (change)='fileChangeEvent($event)', placeholder='Upload file')
+  button(type="submit", (click)="loadPicture()") Send Picture
+
+
+//form([formGroup]="loadPictureForm", (ngSubmit)="loadPicture(loadPictureForm.value)", [class.submitted]="submitted", [class.ng-invalid]="errorServer", novalidate)
+
+//input-file((change)='fileChange($event)', placeholder='Upload file')
