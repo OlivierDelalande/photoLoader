@@ -12,10 +12,4 @@ export class PhotoLoaderService {
     );
   }
 
-  postPicture(picture) {
-    console.log('picture service', picture);
-    return this.http.post('https://us-central1-photo-loader.cloudfunctions.net/api/upload/', {picture}).map((data) => data.json()
-    );
-  }
-
 }
