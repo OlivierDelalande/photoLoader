@@ -1,14 +1,8 @@
-//button((click)="sendJSON()") Send JSON
-
 h1
-  // here we echo the title from the component
   | {{img}}
-
-
 
 form([formGroup]="loadPictureForm")
   input-file(formControlName="file", (change)='fileChangeEvent($event)')
-  //button(type="submit", (click)="loadPicture()") Send Picture
 
 div(*ngIf="img")
   img([src]="img")

@@ -1,21 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
-// let URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
 
 @Injectable()
 export class PhotoLoaderService {
 
   constructor(private http: Http) { }
 
-  postJson(myjson) {
-    return this.http.post('https://us-central1-photo-loader.cloudfunctions.net/api/', myjson).map((data) => data.json()
-    );
-  }
-
   savePictures(picture, jsonSizes) {
 
-    let URL = 'http://localhost:3001/uploads';
+    let URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
 
     let formData: FormData = new FormData();
     formData.append('picture', picture, picture.name);
@@ -32,7 +26,6 @@ export class PhotoLoaderService {
 
      return this.http.post(URL, formData)
         .map(res => res.json());
-
   }
 
 }

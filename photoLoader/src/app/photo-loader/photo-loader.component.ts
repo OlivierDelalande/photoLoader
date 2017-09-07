@@ -1,7 +1,6 @@
 import {
   Component,
-  OnInit,
-  ElementRef
+  OnInit
 } from '@angular/core';
 import {PhotoLoaderService} from '../services/photo-loader.service';
 import {
@@ -9,13 +8,7 @@ import {
   FormGroup,
   FormControl
 } from '@angular/forms';
-import {
-  Http,
-  Response
-} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-const URL = 'http://localhost:3001/uploads';
-// const URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
 
 @Component({
   selector: 'app-photo-loader',
@@ -26,11 +19,6 @@ const URL = 'http://localhost:3001/uploads';
 export class PhotoLoaderComponent implements OnInit {
 
   private img;
-  myjson = {
-    test: "hello",
-    test2: "world"
-      };
-  filesToUpload: Array<File>;
   loadPictureForm: FormGroup;
 
   pictureSizes = [
@@ -51,20 +39,10 @@ export class PhotoLoaderComponent implements OnInit {
   constructor(
     private photoLoader: PhotoLoaderService,
     private fb: FormBuilder,
-    private http: Http,
-    private el: ElementRef
-  ) {
-    this.filesToUpload = [];
-  }
+  ) {}
 
   ngOnInit() {
      this.createLoadForm()
-  }
-
-  sendJSON() {
-    this.photoLoader.postJson(this.myjson).subscribe((data) => {
-      console.log('url from back', data);
-    });
   }
 
   createLoadForm() {
@@ -73,44 +51,6 @@ export class PhotoLoaderComponent implements OnInit {
     });
   }
 
-  // loadPicture() {
-  //   this.makeFileRequest("https://us-central1-photo-loader.cloudfunctions.net/api/upload/", [], this.filesToUpload).then((result) => {
-  //     console.log(result);
-  //   }, (error) => {
-  //     console.error(error);
-  //   });
-  // }
-  //
-  // fileChangeEvent(fileInput: any){
-  //   console.log('fileInput', fileInput);
-  //   this.filesToUpload = <Array<File>> fileInput.target.files;
-  //   console.log('filesToUpload', this.filesToUpload);
-  // }
-  //
-  // makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
-  //   console.log('makeFileRequest');
-  //   return new Promise((resolve, reject) => {
-  //     var formData: any = new FormData();
-  //     var xhr = new XMLHttpRequest();
-  //     for(var i = 0; i < files.length; i++) {
-  //       formData.append("uploads[]", files[i], files[i].name);
-  //     }
-  //     console.log('formData', formData);
-  //     xhr.onreadystatechange = function () {
-  //       if (xhr.readyState == 4) {
-  //         if (xhr.status == 200) {
-  //           resolve(JSON.parse(xhr.response));
-  //         } else {
-  //           reject(xhr.response);
-  //         }
-  //       }
-  //     };
-  //     xhr.open("POST", url, true);
-  //     console.log('formData2', formData);
-  //     xhr.send(formData);
-  //   });
-  // }
-
   fileChangeEvent(event) {
     if(event && event.target){
 
@@ -118,51 +58,20 @@ export class PhotoLoaderComponent implements OnInit {
       if (fileList.length > 0) {
         let file: File = fileList[0];
 
-        this.photoLoader.savePictures(file, this.pictureSizes).catch(error => Observable.throw(error))
-            .subscribe(
-              data => {
-                console.log('data', data);
-                this.img = data.baseUrl + data.pictures[0];
-                console.log(this.img);
-              },
-              error => console.log(error)
-            )
+        this.loadPicture(file, this.pictureSizes)
       }
     }
   }
 
-  // upload() {
-  //   // locate the file element meant for the file upload.
-  //   let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
-  //
-  //   // get the total amount of files attached to the file input.
-  //   let fileCount: number = inputEl.files.length;
-  //
-  //   // create a new fromdata instance
-  //   let formData = new FormData();
-  //
-  //   // check if the filecount is greater than zero, to be sure a file was selected.
-  //   if (fileCount > 0) { // a file was selected
-  //
-  //     // append the key name 'picture' with the first file in the element
-  //     formData.append('picture', inputEl.files.item(0));
-  //     console.log('file', inputEl.files.item(0));
-  //     console.log('form data', formData);
-  //     formData.set('mydata', {width: 50, height: 50} )
-  //
-  //     this.http
-  //         // post the form data to the url defined above and map the response. Then subscribe //to initiate the post. if you don't subscribe, angular wont post.
-  //         .post(URL, formData ).map((res: Response) => res.json())
-  //         // .catch(error => Observable.throw(error))
-  //         .subscribe(
-  //           data => {
-  //             console.log('data', data);
-  //             this.img = data.url;
-  //             console.log(this.img);
-  //           },
-  //           error => console.error(error)
-  //         );
-  //   }
-  // }
-
+  loadPicture (picture, pictureSize) {
+    this.photoLoader.savePictures(picture, pictureSize).catch(error => Observable.throw(error))
+        .subscribe(
+          data => {
+            console.log('data', data);
+            this.img = data.baseUrl + data.pictures[0];
+            console.log(this.img);
+          },
+          error => console.log(error)
+        )
+  }
 }
