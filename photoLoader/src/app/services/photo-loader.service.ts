@@ -32,7 +32,6 @@ export class PhotoLoaderService {
 
      return this.http.post(URL, formData)
         .map(res => res.json());
-
   }
 
 }
