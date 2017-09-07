@@ -8,7 +8,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import {FileSelectDirective} from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -18,7 +17,7 @@ import {FileSelectDirective} from 'ng2-file-upload';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [PhotoLoaderComponent, FileSelectDirective],
+  declarations: [PhotoLoaderComponent],
   exports: [PhotoLoaderComponent ],
   providers: [PhotoLoaderService]
 })

@@ -1,7 +1,25 @@
-button((click)="sendJSON()") Send JSON
+//button((click)="sendJSON()") Send JSON
+
+h1
+  // here we echo the title from the component
+  | {{img}}
+
+div(*ngIf="img")
+  img([src]="img")
 
 form([formGroup]="loadPictureForm")
-  input-file(formControlName="file", (change)='fileChangeEvent($event)', placeholder='Upload file')
-  button(type="submit", (click)="loadPicture()") Send Picture
+  input-file(formControlName="file", (change)='fileChangeEvent($event)')
+  //button(type="submit", (click)="loadPicture()") Send Picture
 
 
+img(src="https://storage.googleapis.com/deuploadfile/javascript600.png")
+img(src="https://storage.googleapis.com/deuploadfile/javascript300.png")
+img(src="https://storage.googleapis.com/deuploadfile/javascript150.png")
+
+img(src="https://storage.googleapis.com/deuploadfile/Basket600.jpg")
+img(src="https://storage.googleapis.com/deuploadfile/Basket300.jpg")
+img(src="https://storage.googleapis.com/deuploadfile/Basket150.jpg")
+
+img(src="https://storage.googleapis.com/deuploadfile/RG600.jpg")
+img(src="https://storage.googleapis.com/deuploadfile/RG300.jpg")
+img(src="https://storage.googleapis.com/deuploadfile/RG150.jpg")
