@@ -32,6 +32,7 @@ export class PhotoLoaderComponent implements OnInit {
       };
   filesToUpload: Array<File>;
   loadPictureForm: FormGroup;
+
   pictureSizes = [
   {
     width: 600,
@@ -117,24 +118,13 @@ export class PhotoLoaderComponent implements OnInit {
       if (fileList.length > 0) {
         let file: File = fileList[0];
 
-        let formData: FormData = new FormData();
-        formData.append('picture', file, file.name);
-
-        let sizes = JSON.stringify(this.pictureSizes);
-        formData.append('sizes', sizes);
-        console.log('formdata1', formData.get('sizes'));
-
-        let headers = new Headers();
-        /** No need to include Content-Type in Angular 4 */
-        headers.append('Content-Type', 'multipart/form-data');
-        headers.append('Accept', 'application/json');
-        // let options = new RequestOptions({headers: headers});
-
-        this.http.post(URL, formData)
-            .map(res => res.json())
-            .catch(error => Observable.throw(error))
+        this.photoLoader.savePictures(file, this.pictureSizes).catch(error => Observable.throw(error))
             .subscribe(
-              data => console.log('success', data),
+              data => {
+                console.log('data', data);
+                this.img = data.baseUrl + data.pictures[0];
+                console.log(this.img);
+              },
               error => console.log(error)
             )
       }
