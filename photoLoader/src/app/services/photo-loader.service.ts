@@ -15,14 +15,14 @@ export class PhotoLoaderService {
 
   savePictures(picture, jsonSizes) {
 
-    let URL = 'http://localhost:3001/uploads';
+    // let URL = 'http://localhost:3001/uploads';
+    let URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
 
     let formData: FormData = new FormData();
     formData.append('picture', picture, picture.name);
 
     let sizes = JSON.stringify(jsonSizes);
     formData.append('sizes', sizes);
-    console.log('formdata1', formData.get('sizes'));
 
     let headers = new Headers();
     /** No need to include Content-Type in Angular 4 */

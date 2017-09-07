@@ -14,8 +14,8 @@ import {
   Response
 } from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-const URL = 'http://localhost:3001/uploads';
-// const URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
+// const URL = 'http://localhost:3001/uploads';
+const URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
 
 @Component({
   selector: 'app-photo-loader',
