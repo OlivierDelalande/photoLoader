@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/Rx';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class PhotoLoaderService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
   savePictures(picture, jsonSizes) {
 
-    let URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
+    // let URL ='https://us-central1-photo-loader.cloudfunctions.net/api/uploads/';
+    let URL = 'http://localhost:3001/uploads';
 
     let formData: FormData = new FormData();
     formData.append('picture', picture, picture.name);
@@ -24,8 +27,14 @@ export class PhotoLoaderService {
     headers.append('Accept', 'application/json');
     // let options = new RequestOptions({headers: headers});
 
-     return this.http.post(URL, formData)
-        .map(res => res.json());
+    return this.http.post(URL, formData)
+               .map(res => res.json()).first().toPromise().then((data) => {
+        const promiseArray = data.pictures.map((elem) => {
+          return firebase.storage().ref('images/' + elem).getDownloadURL();
+        });
+        return Promise.all(promiseArray);
+      });
+
   }
 
 }
