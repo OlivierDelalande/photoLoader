@@ -1,0 +1,10 @@
+form([formGroup]="loadPictureForm")
+  input-file(formControlName="file", (change)='fileChangeEvent($event)')
+
+div(*ngIf="img && img2 && img3")
+  div
+    img([src]="img")
+  div
+    img([src]="img2")
+  div
+    img([src]="img3")
