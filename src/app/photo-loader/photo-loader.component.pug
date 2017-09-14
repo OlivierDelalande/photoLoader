@@ -1,6 +1,8 @@
 form([formGroup]="loadPictureForm")
   input-file(formControlName="file", (change)='fileChangeEvent($event)')
 
+div(*ngIf="progress")
+  p progress bar
 div(*ngIf="img && img2 && img3")
   div
     img([src]="img")

@@ -16,11 +16,9 @@ export class PhotoLoaderService {
 
     let formData: FormData = new FormData();
     formData.append('picture', picture, picture.name);
-    console.log('formData', formData);
 
     let sizes = JSON.stringify(jsonSizes);
     formData.append('sizes', sizes);
-    console.log('formdata1', formData.get('sizes'));
 
     let headers = new Headers();
     /** No need to include Content-Type in Angular 4 */

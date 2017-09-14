@@ -21,21 +21,22 @@ export class PhotoLoaderComponent implements OnInit {
   img: string;
   img2: string;
   img3: string;
+  progress: boolean;
   loadPictureForm: FormGroup;
 
   pictureSizes = [
     {
-      width: 600,
-      height: 600,
+      width: 400,
+      height: 250,
     },
     {
-      width: 300,
-      height: 300,
+      width: 550,
+      height: 450,
     },
     {
-      width: 150,
-      height: 150,
-    },
+      width: 900,
+      height: 750,
+    }
   ];
 
   constructor(private photoLoader: PhotoLoaderService,
@@ -58,6 +59,7 @@ export class PhotoLoaderComponent implements OnInit {
       if (fileList.length > 0) {
         const file: File = fileList[0];
         document.getElementsByTagName('form')[0].style.display = 'none';
+        this.progress = true;
         this.loadPicture(file, this.pictureSizes);
       }
     }
@@ -76,6 +78,7 @@ export class PhotoLoaderComponent implements OnInit {
         .then(data => {
             console.log('datacomponent', data);
             this.setImg(data[0] as string, data[1] as string, data[2] as string);
+            this.progress = false;
           },
         )
         .catch(error => console.log(error));
